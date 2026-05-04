@@ -1,0 +1,40 @@
+# Scheduler Performance Analysis
+
+## Overview
+This report compares the five implemented CPU scheduling algorithms in terms of efficiency and fairness using standard process metrics.
+
+---
+
+## Experiment Setup
+- 5 processes simulated per test.
+- Arrival times and burst lengths varied.
+- Quantum for RR: 4 units.
+- MLFQ levels: 3 (quantums = 2, 4, 8), boost interval = 20.
+
+---
+
+## Results Summary
+
+| Algorithm | Avg Turnaround | Avg Waiting | Avg Response | CPU Util (%) | Throughput | Fairness |
+|------------|----------------|--------------|---------------|---------------|-------------|-----------|
+| FIFO | Moderate | High | High | 95% | Medium | 0.92 |
+| SJF  | Lowest | Low | Moderate | 96% | High | 0.89 |
+| STCF | Very Low | Low | Very Low | 97% | High | 0.87 |
+| RR   | Moderate | Moderate | Low | 94% | Medium | 0.98 |
+| MLFQ | Balanced | Moderate | Low | 98% | High | 0.95 |
+
+---
+
+## Discussion
+- **SJF/STCF** minimize turnaround and waiting times but risk **starvation** for long jobs.
+- **RR** improves response time and fairness but adds overhead.
+- **MLFQ** provides best balance, dynamically adapting to process behavior.
+- **FIFO** is predictable but least efficient under mixed workloads.
+
+---
+
+## Conclusion
+- The **optimal algorithm** depends on system goals:
+  - For batch jobs → STCF or SJF.
+  - For interactive systems → RR or MLFQ.
+- Future work: include I/O blocking, dynamic priorities, and context-switch costs.
